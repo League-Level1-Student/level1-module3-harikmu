@@ -4,6 +4,7 @@
  *    Level 1
  */
 
+import java.awt.Component;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -44,15 +45,24 @@ public class BookOfIllusions extends MouseAdapter {
 		JLabel l1 = loadImageFromComputer(Image1);
 		JLabel l2 = loadImageFromComputer(Image2);
 		// 8. add your JLabel to the frame
+		j.add(l1);
+		j.add(l2);
 		// 9. call the pack() method on the frame
+		j.pack();
 		// 10. add a mouse listener to your frame (hint: use *this*)
+		j.addMouseListener(this);
 	}
 
 	public void mousePressed(MouseEvent e) {
 		// 11. Print "clicked!" to the console when the mouse is pressed
+		System.out.println("clicked!");
 		// 12. remove everything from the frame that was added earlier
+		j.removeAll();
 		// 13. load a new image like before (this is more than one line of code)
+		String Image3 = ("image3.jpg");
+		j.add(Image3,null);
 		// 14. pack the frame
+		j.pack();
 	}
 
 	// [OPTIONAL] 15. goad your users with some annoying or witty pop-ups
