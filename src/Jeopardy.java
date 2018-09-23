@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.net.URL;
 
+import javax.print.MultiDocPrintService;
 import javax.print.attribute.standard.RequestingUserName;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
@@ -57,16 +58,17 @@ public class Jeopardy implements ActionListener {
 		// 5. Add the quizPanel to the frame
 		frame.add(quizPanel);
 		// 6. Use the createButton method to set the value of firstButton 
-		JButton firstButton = createButton("$200");
+		firstButton = createButton("$200");
 		// 7. Add the firstButton to the quizPanel
 		quizPanel.add(firstButton);
 		// 8. Write the code inside the createButton() method below. Check that your game looks like Figure 1 in the Jeopardy Handout - http://bit.ly/1bvnvd4.
 		
 		// 9. Use the secondButton variable to hold a button using the createButton method
-		JButton secondButton = createButton("$400");
-		JButton thirdButton = createButton("$600");
-		JButton fourthButton = createButton("$800");
-		JButton fifthButton = createButton("$1,000");
+	  
+		 secondButton = createButton("$400");
+		 thirdButton = createButton("$600");
+		 fourthButton = createButton("$800");
+		 fifthButton = createButton("$1,000");
 		// 10. Add the secondButton to the quizPanel
 		quizPanel.add(secondButton);
 		quizPanel.add(thirdButton);
@@ -117,6 +119,7 @@ public class Jeopardy implements ActionListener {
 		if (buttonPressed == firstButton) {
 			// Call the askQuestion() method
 			askQuestion("This tropical fruit has a pink, leafy exterior and a mild white or pink filling", "What is a dragonfruit", score);
+			firstButton.setText(" ");
 		}
 			// Fill in the askQuestion() method. When you play the game, the score should change.
 		
@@ -124,31 +127,36 @@ public class Jeopardy implements ActionListener {
 		if (buttonPressed == secondButton) {
 			// Call the askQuestion() method with a harder question
 			askQuestion("This Southeast Asian fruit is known for its disgusting smell", "What is a durian", score);
+			secondButton.setText(" ");
 		}
 		if (buttonPressed == thirdButton) {
-			askQuestion("This fruit has a hard purple exterior and a tart white filling. It is known as the 'Queen of Fruits'", "What is a mangosteen", score);
+			askQuestion("This fruit has a hard purple exterior and a tart white filling. It is known as the 'Queen of Fruits'", "What is a mangosteen", score+600);
+			thirdButton.setText(" ");
 		}
 		if (buttonPressed == fourthButton) {
 			askQuestion("This West African fruit alters the taste buds and makes things taste sweet", "What is a miracle fruit", score);
+			fourthButton.setText(" ");
 		}
 		if (buttonPressed == fifthButton) {
 			askQuestion("This nearly extinct fruit is used in medicines and is indigenous to the Seychelle Islands.", "What is a sea coconut", score);
+			fifthButton.setText(" ");
 		}
 
 		// Clear the button text (set the button text to nothing)	
-		firstButton.setText(" ");
-		secondButton.setText(" ");
-		thirdButton.setText(" ");
-		fourthButton.setText(" ");
-		fifthButton.setText(" ");
+		
+	}
 
+	private void playJeopardyTheme(boolean b) {
+		// TODO Auto-generated method stub
+		
 	}
 
 	private void askQuestion(String question, String correctAnswer, int prizeMoney) {
 		// Remove this temporary message
 		
 		// Use a pop up to ask the user the question
-		String q = JOptionPane.showInputDialog("?");
+		JOptionPane.showInputDialog(question);
+		String q= correctAnswer;
 		// If the answer is correct
 		if (q==correctAnswer) {
 			// Increase the score by the prizeMoney
@@ -156,14 +164,14 @@ public class Jeopardy implements ActionListener {
 			// Call the updateScore() method
 			updateScore();
 			// Pop up a message to tell the user they were correct
-			JOptionPane.showMessageDialog(null, "You were correct.");
+			JOptionPane.showMessageDialog(null, "Correct.");
 		}
 		// Otherwise
 			else {
 			// Decrement the score by the prizeMoney
 			score-=prizeMoney;
 			// Pop up a message to tell the user the correct answer
-			JOptionPane.showMessageDialog(null, "The correct answer was");
+			JOptionPane.showMessageDialog(null, correctAnswer);
 			// Call the updateScore() method
 			updateScore();
 			}
