@@ -30,11 +30,14 @@ public class SimonSays extends KeyAdapter {
  	Date timeAtStart;
  	private  void makeAlbum() {
  // 2. add 4 images which match keyboard keys like this: images.put(new Integer(KeyEvent.VK_UP), "image.jpg");
- 		
+ 	images.put(new Integer(KeyEvent.VK_UP), "u.jpg");
+ 	images.put(new Integer(KeyEvent.VK_UP), "$.jpg");
+ 	images.put(new Integer(KeyEvent.VK_UP), "@.jpg");
+ 	images.put(new Integer(KeyEvent.VK_UP), "7.png");
  // 3. Tell the user to "Press the matching key when 'Simon says' otherwise press a different key"
- 
+ 	JOptionPane.showMessageDialog(null,"Press the matching key when 'Simon says.' Otherwise, press a different key.");
  // 4. call the method to show an image
-
+ 	showImage();
  	}
 	public void keyPressed(KeyEvent e) {
     	int keyCode = e.getKeyCode();
@@ -55,16 +58,24 @@ public class SimonSays extends KeyAdapter {
 	}
 	private void showImage() {
     	//5. initialize your frame to a new JFrame()
-	 
+	c = new JFrame();
     	//6. set the frame to visible
-	
-  	 //frame.add(getNextRandomImage()); //7. rename to the name of your frame
-    	
+	c.setVisible(true);
+	//7. rename to the name of your frame
+  	c.setName("Simon");
     	// 8. set the size of the frame 
-     	
+    c.setSize(600, 600);
     	// 9. add a key listener to the frame
+	c.addKeyListener(this);
 	
-   	 //10. Use the speak method to either say "Simon says press this key" or "Press this key"
+   	//10. Use the speak method to either say "Simon says press this key" or "Press this key"
+	simonSays= ((int)(Math.random()+1.5));
+	if (simonSays == 1) {
+		JOptionPane.showInputDialog("Simon says press this key");
+	} else {
+		JOptionPane.showInputDialog("Press this key");
+	}
+	
     	//Hint: use the simonSays int and a random number
 	}
 	private Component getNextRandomImage() {
