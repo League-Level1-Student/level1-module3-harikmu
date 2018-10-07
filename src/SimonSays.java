@@ -27,39 +27,54 @@ public class SimonSays extends KeyAdapter {
  	private int imageIndex;
  	private int tries = 0;
  	private int simonSays = 0;
+ 	private int points = 0;
  	Date timeAtStart;
  	private  void makeAlbum() {
  // 2. add 4 images which match keyboard keys like this: images.put(new Integer(KeyEvent.VK_UP), "image.jpg");
  	images.put(new Integer(KeyEvent.VK_UP), "u.jpg");
- 	images.put(new Integer(KeyEvent.VK_UP), "$.jpg");
- 	images.put(new Integer(KeyEvent.VK_UP), "@.jpg");
- 	images.put(new Integer(KeyEvent.VK_UP), "7.png");
+ 	images.put(new Integer(KeyEvent.VK_DOWN), "$.jpg");
+ 	images.put(new Integer(KeyEvent.VK_LEFT), "@.jpg");
+ 	images.put(new Integer(KeyEvent.VK_RIGHT), "7.png");
  // 3. Tell the user to "Press the matching key when 'Simon says' otherwise press a different key"
  	JOptionPane.showMessageDialog(null,"Press the matching key when 'Simon says.' Otherwise, press a different key.");
  // 4. call the method to show an image
  	showImage();
+ 	c.setDefaultCloseOperation(c.EXIT_ON_CLOSE);
  	}
+ 	
 	public void keyPressed(KeyEvent e) {
     	int keyCode = e.getKeyCode();
     	// 16. make a points variable to track the score. tell the user their score at the end.
     	//17. if the keyCode matches the imageIndex and "Simon says..."  increase their score
+    	if (keyCode == imageIndex && simonSays == 1) {
+			points+=1;
+		}
     	//18.   if the keyCode doesn't match the imageIndex and "Simon didn't say..."  increase their score	
+    	if (keyCode != imageIndex && simonSays != 1) {
+    			points+=1;
+    		}
     	//19. Use the speak method to tell the user if they were correct or not
+    	if (keyCode != imageIndex && simonSays == 1 || keyCode == imageIndex && simonSays != 1) {
+			speak("You are correct");
+		}
     	//13. increment tries by 1
-  	
+  	tries+=1;
     	//14. if tries is greater than 9 (or however many you want)
-    	
+    	if(tries > 9) {
     	//15.    	exit the program
+    System.exit(0);
+    	}
 
     	//11. dispose of the frame
-   	
+   	c.dispose();
     	//12. call the method to show an image
-
+   	showImage();
 	}
 	private void showImage() {
     	//5. initialize your frame to a new JFrame()
 	c = new JFrame();
     	//6. set the frame to visible
+	c.add(getNextRandomImage());
 	c.setVisible(true);
 	//7. rename to the name of your frame
   	c.setName("Simon");
@@ -71,9 +86,9 @@ public class SimonSays extends KeyAdapter {
    	//10. Use the speak method to either say "Simon says press this key" or "Press this key"
 	simonSays= ((int)(Math.random()+1.5));
 	if (simonSays == 1) {
-		JOptionPane.showInputDialog("Simon says press this key");
+		speak("Simon says press this key");
 	} else {
-		JOptionPane.showInputDialog("Press this key");
+		speak("Press this key");
 	}
 	
     	//Hint: use the simonSays int and a random number
@@ -97,6 +112,7 @@ public class SimonSays extends KeyAdapter {
 	public static void main(String[] args) throws Exception {
 	 new SimonSays().makeAlbum();
 	}
+	
 }
 
 /* 
